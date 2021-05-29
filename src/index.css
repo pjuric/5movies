@@ -5,7 +5,7 @@
 * {
     overflow-x: hidden !important;
     color: #e5e5e5;
-    transition: all 100ms ease-in-out;
+    transition: all 200ms ease-in-out;
 }
 
 button:focus{

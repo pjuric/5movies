@@ -4,18 +4,26 @@ import Explore from './components/Explore'
 import Header from './components/Header'
 import Featured from './components/Featured';
 import Loading from './components/Loading';
+import Genres from './components/Genres';
 
 function App() {
 
   const API_KEY = "3f3460fb8427b4da507a64e4c80f3a16"
     const [movies, setMovies] = useState([])
+    const [rated, setRated] = useState([])
+    const [genres, setGenres] = useState([])
     const [loading, setLoading] = useState(true)
-    const url = `https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&language=en-US`
+    const getTrending = () => axios.get(`https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&language=en-US`)
+    const getTopRated = () => axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`)
+    const getGenres = () => axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`)
+    const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
   
     useEffect(() => {
       async function fetchData() {
-        const request = await axios.get(url);
+        const [request, top, allgenres] = await axios.all([getTrending(), getTopRated(), getGenres()]);
         setMovies(request.data.results)
+        setRated(top.data.results)
+        setGenres(allgenres.data.genres)
         setLoading(false)
         return request;
       }
@@ -28,11 +36,13 @@ function App() {
         <div>
           <Header movies={movies}/>
           <Explore/>
-          <Featured  movies={movies}/>
+          <Featured  movies={movies} rated={rated}/>
+          <Genres genres={genres}/>
         </div>  
       }
     </div>
   );
+  
 }
 
 export default App;
