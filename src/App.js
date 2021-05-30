@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import Loading from './components/Loading';
+import Loading from './components/Loading'
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import MovieDetails from './MovieDetails';
-import Home from './Home';
+import MovieDetails from './MovieDetails'
+import GenreMovies from './GenreMovies'
+import Home from './Home'
+import Nav from './components/Nav'
 
 function App() {
 
@@ -34,12 +36,16 @@ function App() {
       {loading ? <Loading/> : 
           <Router>
             <div>
+              <Nav/>
               <Switch>
                 <Route exact path="/">
                   <Home movies={movies} rated={rated} genres={genres}/>
                 </Route>
                 <Route exact path="/movie/:id">
                   <MovieDetails/>
+                </Route>
+                <Route exact path="/genre/:id">
+                  <GenreMovies/>
                 </Route>
               </Switch>
             </div>

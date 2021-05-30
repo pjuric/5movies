@@ -1,4 +1,3 @@
-import Nav from './Nav'
 import StarHalfIcon from '@material-ui/icons/StarHalf'
 import { Link } from "react-router-dom";
 import PeopleIcon from '@material-ui/icons/People'
@@ -9,7 +8,6 @@ function Header ({ movies }) {
 
     return (
         <div className="h-screen">
-            <Nav/>
             <div className="absolute top-0 right-0 min-w-full min-h-full object-cover bg-gradient-to-b bg-black-primary opacity-40 z-10 flex place-items-start pt-40 justify-center">
         
             </div>
