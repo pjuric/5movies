@@ -21,6 +21,7 @@ function MovieDetails() {
     const [social, setSocial] = useState([])
     const [credits, setCredits] = useState([])
     const [videos, setVideos] = useState([])
+    const [providers, setProviders] = useState([])
     const [loading, setLoading] = useState(true)
   
     useEffect(() => {
@@ -29,20 +30,22 @@ function MovieDetails() {
         const getSocialMedia = () => axios.get(`https://api.themoviedb.org/3/movie/${id}/external_ids?api_key=${API_KEY}`)
         const getCredits = () => axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`)
         const getMovieVideos = () => axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`)
+        const getProviders = () => axios.get(`https://api.themoviedb.org/3/movie/${id}/watch/providers?api_key=${API_KEY}`)
       async function fetchData() {
-        const [details, hashtag, media, cast, video] = await axios.all([getMovieDetails(), getKeyWords(), getSocialMedia(),getCredits(), getMovieVideos() ]);
+        const [details, hashtag, media, cast, video, companies] = await axios.all([getMovieDetails(), getKeyWords(), getSocialMedia(),getCredits(), getMovieVideos(), getProviders() ]);
         setMovie(details.data)
         setKeywords(hashtag.data.keywords)
         setSocial(media.data)
         setCredits(cast.data.cast)
         setVideos(video.data.results)
+        setProviders(companies.data.results.US)
         setLoading(false)
         return details;
       }
       fetchData();
-    })
+    }, [])
 
-    console.log(keywords)
+    console.log(providers)
 
     return (
         <div className="h-auto bg-bg-main">
@@ -99,27 +102,32 @@ function MovieDetails() {
                                 <div></div>
                             }
                         </div>
-                        <div className="flex space-x-2 md:space-x-4">
-                            {social.facebook_id ? 
-                                <a target="_blank" rel="noreferrer" href={`https://www.facebook.com/${social.facebook_id}`}><FacebookIcon/></a>
-                            :
-                                <></>
-                            }
-                            {social.instagram_id ? 
-                                <a target="_blank" rel="noreferrer" href={`https://www.instagram.com/${social.instagram_id}`}><InstagramIcon/></a>
-                            :
-                                <></>
-                            }
-                            {social.twitter_id ? 
-                                <a target="_blank" rel="noreferrer" href={`https://www.twitter.com/${social.twitter_id}`}><TwitterIcon/></a>
-                            :
-                                <></>
-                            }
-                            {social.imdb_id ? 
-                                <a target="_blank" rel="noreferrer" href={`https://www.imdb.com/title/${social.imdb_id}/?ref_=vp_vi_tt`}><MovieIcon/></a>
-                            :
-                                <></>
-                            }
+                        <div className="w-full flex justify-between items-center">
+                            <div className="flex space-x-2 md:space-x-4">
+                                {social.facebook_id ? 
+                                    <a target="_blank" rel="noreferrer" href={`https://www.facebook.com/${social.facebook_id}`}><FacebookIcon/></a>
+                                :
+                                    <></>
+                                }
+                                {social.instagram_id ? 
+                                    <a target="_blank" rel="noreferrer" href={`https://www.instagram.com/${social.instagram_id}`}><InstagramIcon/></a>
+                                :
+                                    <></>
+                                }
+                                {social.twitter_id ? 
+                                    <a target="_blank" rel="noreferrer" href={`https://www.twitter.com/${social.twitter_id}`}><TwitterIcon/></a>
+                                :
+                                    <></>
+                                }
+                                {social.imdb_id ? 
+                                    <a target="_blank" rel="noreferrer" href={`https://www.imdb.com/title/${social.imdb_id}/?ref_=vp_vi_tt`}><MovieIcon/></a>
+                                :
+                                    <></>
+                                }
+                            </div>
+                            <div>
+                                <a href="/"><img className="h-8 rounded-full opacity-50 hover:opacity-100" src={providers.flatrate ? `${BASE_URL}${providers.flatrate[0].logo_path}` : `${BASE_URL}${providers.rent[0].logo_path}`} alt=""/></a>
+                            </div>
                         </div>
                     </div>
                     <img
@@ -137,7 +145,6 @@ function MovieDetails() {
                 :
                     <></>
                 }
-                
             </div>
             }
         </div>

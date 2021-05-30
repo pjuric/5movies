@@ -9,10 +9,10 @@ function Cast({ credits }) {
             </div>
             <div className="flex pt-4 justify-evenly md:pt-10">
                 {credits.slice(0, 5).map(credit => (
-                    <div className="flex flex-col justify-center items-center">
+                    <div key={credit.id} className="flex flex-col justify-center items-center">
                         <a className="" href="/"><img className="h-20 rounded-md sm:h-32 md:h-40 lg:h-60 xl:h-80" alt="" src={`${BASE_URL}${credit.profile_path}`}/></a>
                         <div className="text-center hidden lg:block">
-                            <p classname="lg:text-lg">{credit.name}</p>
+                            <p className="lg:text-lg">{credit.name}</p>
                             <p className="italic">({credit.character})</p>
                         </div>
                     </div>
