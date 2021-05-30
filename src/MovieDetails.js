@@ -11,6 +11,7 @@ import TwitterIcon from '@material-ui/icons/Twitter'
 import MovieIcon from '@material-ui/icons/Movie'
 import MovieVideos from './components/MovieVideos';
 import Cast from './components/Cast';
+import SimilarMovies from './components/SimilarMovies';
 
 function MovieDetails() {
     const { id } = useParams()
@@ -22,30 +23,41 @@ function MovieDetails() {
     const [credits, setCredits] = useState([])
     const [videos, setVideos] = useState([])
     const [providers, setProviders] = useState([])
+    const [similar, setSimilar] = useState([])
     const [loading, setLoading] = useState(true)
-  
+
+    const urlMovieDetails = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`
+    const urlKeywords = `https://api.themoviedb.org/3/movie/${id}/keywords?api_key=${API_KEY}`
+    const urlSocialMedia = `https://api.themoviedb.org/3/movie/${id}/external_ids?api_key=${API_KEY}`
+    const urlCredits = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
+    const urlMoviesVideos = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`
+    const urlProviders = `https://api.themoviedb.org/3/movie/${id}/watch/providers?api_key=${API_KEY}`
+    const urlSimilarMovies = `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${API_KEY}&language=en-US&page=1`
+
     useEffect(() => {
-        const getMovieDetails = () => axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`)
-        const getKeyWords = () => axios.get(`https://api.themoviedb.org/3/movie/${id}/keywords?api_key=${API_KEY}`)
-        const getSocialMedia = () => axios.get(`https://api.themoviedb.org/3/movie/${id}/external_ids?api_key=${API_KEY}`)
-        const getCredits = () => axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`)
-        const getMovieVideos = () => axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`)
-        const getProviders = () => axios.get(`https://api.themoviedb.org/3/movie/${id}/watch/providers?api_key=${API_KEY}`)
+        const getMovieDetails = () => axios.get(urlMovieDetails)
+        const getKeyWords = () => axios.get(urlKeywords)
+        const getSocialMedia = () => axios.get(urlSocialMedia)
+        const getCredits = () => axios.get(urlCredits)
+        const getMovieVideos = () => axios.get(urlMoviesVideos)
+        const getProviders = () => axios.get(urlProviders)
+        const getSimilarMovies = () => axios.get(urlSimilarMovies)
       async function fetchData() {
-        const [details, hashtag, media, cast, video, companies] = await axios.all([getMovieDetails(), getKeyWords(), getSocialMedia(),getCredits(), getMovieVideos(), getProviders() ]);
+        const [details, hashtag, media, cast, video, companies, similars] = await axios.all([getMovieDetails(), getKeyWords(), getSocialMedia(),getCredits(), getMovieVideos(), getProviders(), getSimilarMovies() ]);
         setMovie(details.data)
         setKeywords(hashtag.data.keywords)
         setSocial(media.data)
         setCredits(cast.data.cast)
         setVideos(video.data.results)
         setProviders(companies.data.results.US)
+        setSimilar(similars.data.results)
         setLoading(false)
         return details;
       }
       fetchData();
-    }, [])
+    }, [urlMovieDetails, urlKeywords, urlSocialMedia, urlCredits, urlMoviesVideos, urlProviders, urlSimilarMovies])
 
-    console.log(providers)
+    // console.log(similar)
 
     return (
         <div className="h-auto bg-bg-main">
@@ -58,11 +70,11 @@ function MovieDetails() {
                     <div className="absolute pb-2 top-0 right-0 min-w-full min-h-full space-y-4 object-cover bg-gradient-to-t from-bg-main z-10 flex flex-col justify-end md:pb-16 pl-5 pr-5 items-baseline lg:p-24">
                         <h1 className="text-2xl font-bold sm:text-4xl overflow-hidden">{movie.title} ({movie.release_date.slice(0, 4)}.)</h1>
                         {movie.tagline ? 
-                            <h2 className="text-xl font-normal sm:text-2xl overflow-hidden italic">{movie.tagline}</h2>
+                            <h2 className="text-xl font-normal sm:text-2xl overflow-hidden italic">{movie.tagline} </h2>
                         : 
                             <div className="flex space-x-2 w-screen">
                                 {keywords.map(keyword => (
-                                    <h2 className="text-xl font-normal sm:text-2xl overflow-hidden italic">#{keyword.name}</h2>
+                                    <h2 className="text-xl font-normal sm:text-2xl overflow-hidden italic">#{keyword.name} </h2>
                                 ))}
                             </div>
                         }
@@ -145,6 +157,7 @@ function MovieDetails() {
                 :
                     <></>
                 }
+                <SimilarMovies similar={similar}/>
             </div>
             }
         </div>
