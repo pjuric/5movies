@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import Explore from './components/Explore'
-import Header from './components/Header'
-import Featured from './components/Featured';
 import Loading from './components/Loading';
-import Genres from './components/Genres';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import MovieDetails from './MovieDetails';
+import Home from './Home';
 
 function App() {
 
-  const API_KEY = "3f3460fb8427b4da507a64e4c80f3a16"
+    const API_KEY = "3f3460fb8427b4da507a64e4c80f3a16"
     const [movies, setMovies] = useState([])
     const [rated, setRated] = useState([])
     const [genres, setGenres] = useState([])
@@ -33,16 +32,22 @@ function App() {
   return (
     <div className="bg-bg-main w-screen">
       {loading ? <Loading/> : 
-        <div>
-          <Header movies={movies}/>
-          <Explore/>
-          <Featured  movies={movies} rated={rated}/>
-          <Genres genres={genres}/>
-        </div>  
+          <Router>
+            <div>
+              <Switch>
+                <Route exact path="/">
+                  <Home movies={movies} rated={rated} genres={genres}/>
+                </Route>
+                <Route exact path="/movie/:id">
+                  <MovieDetails/>
+                </Route>
+              </Switch>
+            </div>
+          </Router> 
       }
     </div>
   );
-  
+
 }
 
 export default App;

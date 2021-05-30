@@ -14,7 +14,7 @@ function Featured({ movies, rated }) {
                 </div>
             </div>
             <div className="space-y-3 flex flex-col items-center lg:items-baseline w-full">
-                <h2 className="font-semibold sm:text-2xl">Now Trending</h2>
+                <h2 className="font-semibold sm:text-2xl">Top Rated</h2>
                 <div className="space-y-3 flex flex-col items-center lg:flex-row lg:space-x-3 lg:space-y-0 w-full">
                     {rated.slice(0, 3).map(movie => (
                         <Thumbnail key={movie.id} id={movie.id} movie={movie}/>

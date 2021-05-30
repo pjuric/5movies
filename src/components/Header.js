@@ -1,9 +1,11 @@
 import Nav from './Nav'
 import StarHalfIcon from '@material-ui/icons/StarHalf'
+import { Link } from "react-router-dom";
 import PeopleIcon from '@material-ui/icons/People'
 
 function Header ({ movies }) {
     const BASE_URL = "https://image.tmdb.org/t/p/original/";
+    const id = movies[0].id
 
     return (
         <div className="h-screen">
@@ -25,7 +27,9 @@ function Header ({ movies }) {
                 </div>
                 <p className="sm:w-96 md:w-1/2">{movies[0].overview}</p>
                 <div className="space-x-4">
-                    <button className="bg-black-primary w-20 bg-opacity-50 font-semibold p-2 rounded-md hover:bg-opacity-70 sm:w-36">Details</button>
+                        <Link to={`/movie/${id}`}>
+                            <button className="bg-black-primary w-20 bg-opacity-50 font-semibold p-2 rounded-md hover:bg-opacity-70 sm:w-36">Details</button>
+                        </Link>
                     <button className="bg-white-primary text-black-full bg-opacity-50 font-semibold p-2 rounded-md hover:bg-opacity-70 sm:w-36">Add to List</button>
                 </div>
             </div>
