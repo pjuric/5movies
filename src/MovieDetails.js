@@ -67,7 +67,7 @@ function MovieDetails() {
                     <div className="absolute top-0 right-0 min-w-full min-h-full object-cover bg-gradient-to-b bg-black-primary opacity-40 z-10 flex place-items-start justify-center">
             
                     </div>
-                    <div className="absolute pb-2 top-0 right-0 min-w-full min-h-full space-y-4 object-cover bg-gradient-to-t from-bg-main z-10 flex flex-col justify-end md:pb-16 pl-5 pr-5 items-baseline lg:p-24">
+                    <div className="absolute pb-3 top-0 right-0 min-w-full min-h-full space-y-4 object-cover bg-gradient-to-t from-bg-main z-10 flex flex-col justify-end md:pb-8 pl-5 pr-5 items-baseline lg:p-24 lg:pb-10">
                         <h1 className="text-2xl font-bold sm:text-4xl overflow-hidden">{movie.title} ({movie.release_date.slice(0, 4)}.)</h1>
                         {movie.tagline ? 
                             <h2 className="text-xl font-normal sm:text-2xl overflow-hidden italic">{movie.tagline} </h2>
@@ -101,7 +101,7 @@ function MovieDetails() {
                                 <p className="uppercase">{movie.original_language}</p>
                             </div>
                         </div>
-                        <p className="max-h-64 sm:max-h-full sm:w-96 md:w-1/2">{movie.overview}</p>
+                        <p className="max-h-52 sm:max-h-full sm:w-96 md:w-1/2">{movie.overview}</p>
                         <div className="space-x-4 flex">
                             <div className="bg-white-primary text-black-full overflow-hidden bg-opacity-50 font-semibold p-2 rounded-md hover:bg-opacity-70 sm:w-36 flex justify-center items-center h-10">
                                 <a href="/" className="text-base">Add to List</a>
@@ -151,13 +151,15 @@ function MovieDetails() {
                         alt="poster"
                     />
                 </div>
-                <Cast credits={credits}/>
-                {videos.length > 0 ?
-                    <MovieVideos videos={videos}/>
-                :
-                    <></>
-                }
-                <SimilarMovies similar={similar}/>
+                <div className="space-y-20">
+                    <Cast credits={credits}/>
+                    {videos.length > 3 ?
+                        <MovieVideos videos={videos}/>
+                    :
+                        <></>
+                    }
+                    <SimilarMovies similar={similar}/>
+                </div>
             </div>
             }
         </div>

@@ -2,7 +2,7 @@ import React from 'react'
 
 function Explore() {
     return (
-        <div className="flex mt-5 flex-col space-x-1 w-screen h-auto md:flex-row justify-evenly items-center p-5"> 
+        <div className="flex flex-col space-x-1 w-screen h-auto md:flex-row justify-evenly items-center pr-5 pl-5"> 
             <img 
                 src="./images/man.svg"
                 alt=""
