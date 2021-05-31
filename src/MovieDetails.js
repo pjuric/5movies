@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import Loading from './components/Loading';
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import StarHalfIcon from '@material-ui/icons/StarHalf'
 import LanguageIcon from '@material-ui/icons/Language'
 import WatchLaterIcon from '@material-ui/icons/WatchLater'
@@ -57,8 +57,6 @@ function MovieDetails() {
       fetchData();
     }, [urlMovieDetails, urlKeywords, urlSocialMedia, urlCredits, urlMoviesVideos, urlProviders, urlSimilarMovies])
 
-    // console.log(similar)
-
     return (
         <div className="h-auto bg-bg-main">
             {loading ? <Loading/> :
@@ -80,11 +78,14 @@ function MovieDetails() {
                         }
                         <div className="flex flex-row space-x-3">
                             {movie.genres.map(genre => (
-                                <a 
-                                    key={genre.id} 
-                                    href="/"
-                                    className="hover:text-white-primary break-normal text-center"
-                                >{genre.name}</a>
+                                <Link to={`/genre/${genre.id}/${genre.name}`}>
+                                    <a 
+                                        key={genre.id} 
+                                        href="/"
+                                        className="hover:text-white-primary break-normal text-center"
+                                    >{genre.name}</a>
+                                </Link>
+                                
                             ))}
                         </div>
                         <div className="flex space-x-10">

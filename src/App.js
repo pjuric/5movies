@@ -14,12 +14,15 @@ function App() {
     const [rated, setRated] = useState([])
     const [genres, setGenres] = useState([])
     const [loading, setLoading] = useState(true)
-    const getTrending = () => axios.get(`https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&language=en-US`)
-    const getTopRated = () => axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`)
-    const getGenres = () => axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`)
-    const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
-  
+
+    const urlTrending = `https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&language=en-US`
+    const urlTopRated = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`
+    const urlGenres = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
+    
     useEffect(() => {
+      const getTrending = () => axios.get(urlTrending)
+      const getTopRated = () => axios.get(urlTopRated)
+      const getGenres = () => axios.get(urlGenres)
       async function fetchData() {
         const [request, top, allgenres] = await axios.all([getTrending(), getTopRated(), getGenres()]);
         setMovies(request.data.results)
@@ -29,7 +32,7 @@ function App() {
         return request;
       }
       fetchData();
-    }, [url])
+    }, [urlTrending, urlTopRated, urlGenres])
 
   return (
     <div className="bg-bg-main w-screen">
@@ -44,7 +47,7 @@ function App() {
                 <Route exact path="/movie/:id">
                   <MovieDetails/>
                 </Route>
-                <Route exact path="/genre/:id">
+                <Route exact path="/genre/:id/:name">
                   <GenreMovies/>
                 </Route>
               </Switch>
