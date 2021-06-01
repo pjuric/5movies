@@ -6,6 +6,8 @@ import MovieDetails from './MovieDetails'
 import GenreMovies from './GenreMovies'
 import Home from './Home'
 import Nav from './components/Nav'
+import TrendingMovies from './TrendingMovies'
+import CreditDetails from './components/CreditDetails'
 
 function App() {
 
@@ -49,6 +51,15 @@ function App() {
                 </Route>
                 <Route exact path="/genre/:id/:name">
                   <GenreMovies/>
+                </Route>
+                <Route exact path="/trending">
+                  <TrendingMovies movies={movies} title="Trending"/>
+                </Route>
+                <Route exact path="/toprated">
+                  <TrendingMovies movies={rated} title="Top Rated"/>
+                </Route>
+                <Route exact path="/credits/:id">
+                  <CreditDetails/>
                 </Route>
               </Switch>
             </div>

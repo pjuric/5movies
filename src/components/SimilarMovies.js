@@ -18,7 +18,7 @@ function SimilarMovies({ similar }) {
                                     } 
                                     alt="" 
                                     className="absolute inset-0 min-h-full max-h-full min-w-full object-cover shadow-md hover:opacity-10 rounded-md"/>
-                                <p className="overflow-hidden text-xs sm:text-sm self-center px-5 pt-3">{movie.overview}.</p>   
+                                <p className="overflow-hidden line-clamp-6 text-xs sm:text-sm self-center px-5 pt-3">{movie.overview}.</p>   
                             </Link>
                         </div>
                         <h2 className="h-14 text-sm text-center lg:h-16 xl:h-24 pt-2 overflow-hidden sm:text-base lg:text-lg">{movie.title} ({movie.release_date.slice(0, 4)}.)</h2>  

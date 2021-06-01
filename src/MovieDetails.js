@@ -76,13 +76,13 @@ function MovieDetails() {
                         alt="poster"
                     />
                     <div className="relative sm:absolute sm:max-w-screen-sm pb-2 pt-4 top-0 right-0 min-w-full sm:min-h-full space-y-4 object-cover bg-gradient-to-t from-bg-main z-10 flex flex-col justify-end md:pb-8 pl-5 pr-5 items-baseline lg:p-24 lg:pb-10">
-                        <h1 className="text-2xl font-bold sm:text-4xl sm:h-14 overflow-hidden">{movie.title} ({movie.release_date.slice(0, 4)}.)</h1>
+                        <h1 className="text-2xl font-bold sm:text-2xl lg:text-4xl sm:h-14 overflow-hidden">{movie.title} ({movie.release_date.slice(0, 4)}.)</h1>
                         {movie.tagline ? 
                             <h2 className="text-xl font-normal sm:text-2xl overflow-hidden italic">{movie.tagline} </h2>
                         : 
-                            <div className="flex space-x-2 w-screen">
-                                {keywords.map(keyword => (
-                                    <h2 className="text-xl font-normal sm:text-2xl overflow-hidden italic">#{keyword.name} </h2>
+                            <div className="flex  space-x-2 w-screen">
+                                {keywords.slice(0, 4).map(keyword => (
+                                    <h2 className="text-xs font-normal sm:text-lg overflow-hidden italic">#{keyword.name} </h2>
                                 ))}
                             </div>
                         }
@@ -148,20 +148,28 @@ function MovieDetails() {
                                     <></>
                                 }
                             </div>
-                            <div>
-                                <a href="/"><img className="h-8 rounded-full opacity-50 hover:opacity-100" src={providers.flatrate ? `${BASE_URL}${providers.flatrate[0].logo_path}` : `${BASE_URL}${providers.rent[0].logo_path}`} alt=""/></a>
-                            </div>
+                            {providers ?
+                                <div>
+                                    <a href="/"><img className="h-8 rounded-full opacity-50 hover:opacity-100" src={providers.flatrate ? `${BASE_URL}${providers.flatrate[0].logo_path}` : `${BASE_URL}${providers.rent[0].logo_path}` || `${BASE_URL}${providers.buy[0].logo_path}`} alt=""/></a>
+                                </div>
+                            : <></>
+                            } 
                         </div>
                     </div>
                 </div>
                 <div className="space-y-20 pt-5">
                     <Cast credits={credits}/>
-                    {videos.length > 3 ?
+                    {videos.length >= 3 ?
                         <MovieVideos videos={videos}/>
                     :
                         <></>
                     }
-                    <SimilarMovies similar={similar}/>
+                    {similar.length > 0 ? 
+                        <SimilarMovies similar={similar}/>
+                        
+                    : <></>
+                    } 
+                    
                 </div>
             </div>
             }

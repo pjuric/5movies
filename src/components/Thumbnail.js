@@ -8,7 +8,7 @@ function Thumbnail({ movie }) {
     const BASE_URL = "https://image.tmdb.org/t/p/original/";
     const id = movie.id
     return (
-        <div className="transition duration-200 ease-in transform hover:scale-95 hover:z-50 space-y-1 md:space-y-3 oveflow-hidden relative text-white-primary rounded-md cursor-pointer bg-black-full h-16 sm:h-28  w-full lg:h-52 xl:h-64 xl:w-full flex flex-col justify-center items-center">
+        <div className="transition duration-200 ease-in transform hover:scale-95 hover:z-50 space-y-1 md:space-y-3 oveflow-hidden relative text-white-primary rounded-md cursor-pointer bg-black-full h-20 sm:h-28  w-full lg:h-52 xl:h-64 xl:w-full flex flex-col justify-center items-center">
             <Link to={`/movie/${id}`}>
             <img 
                 alt=""

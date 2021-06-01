@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Cast({ credits }) {
     const BASE_URL = "https://image.tmdb.org/t/p/original/"
@@ -11,7 +12,11 @@ function Cast({ credits }) {
                 {credits.slice(0, 5).map(credit => (
                     credit.profile_path ?
                     <div key={credit.id} className="flex flex-col justify-center items-center">
-                        <a className="" href="/"><img className="h-20 rounded-md sm:h-32 md:h-40 lg:h-60 xl:h-80" alt="" src={`${BASE_URL}${credit.profile_path}`}/></a>
+                        <div>
+                            <Link to={`/credits/${credit.id}`}>
+                                <a className="" href="/"><img className="h-20 rounded-md sm:h-32 md:h-40 lg:h-60 xl:h-80" alt="" src={`${BASE_URL}${credit.profile_path}`}/></a>
+                            </Link>
+                        </div>
                         <div className="text-center hidden lg:block">
                             <p className="lg:text-lg">{credit.name}</p>
                             <p className="italic">({credit.character})</p>
