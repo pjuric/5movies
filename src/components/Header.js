@@ -12,7 +12,7 @@ function Header ({ movies }) {
         
             </div>
             <div className="absolute top-0 right-0 pb-11 min-w-full min-h-full space-y-4 object-cover bg-gradient-to-t from-bg-main z-10 flex flex-col justify-end pl-5 items-baseline lg:p-24 lg:pb-20">
-                <h1 className="text-2xl font-bold sm:text-4xl overflow-hidden">{movies[0].title}</h1>
+                <h1 className="text-2xl font-bold sm:text-4xl overflow-hidden">NOW FEATURED: <br/><i className="text-white-primary">{movies[0].title}</i></h1>
                 <div className="flex space-x-10">
                     <div className="flex space-x-2">
                         <StarHalfIcon/>
@@ -23,7 +23,7 @@ function Header ({ movies }) {
                         <p>{movies[0].vote_count}</p>
                     </div>
                 </div>
-                <p className="max-h-52 sm:max-h-full sm:w-96 md:w-1/2">{movies[0].overview}</p>
+                <p className="line-clamp-5 sm:line-clamp-none max-h-52 sm:max-h-full sm:w-96 md:w-1/2">{movies[0].overview}</p>
                 <div className="space-x-4">
                         <Link to={`/movie/${id}`}>
                             <button className="bg-black-primary w-20 bg-opacity-50 font-semibold p-2 rounded-md hover:bg-opacity-70 sm:w-36">Details</button>

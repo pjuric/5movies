@@ -4,7 +4,7 @@ import MoreHorizRoundedIcon from '@material-ui/icons/MoreHorizRounded';
 
 function Featured({ movies, rated }) {
     return (
-        <div className="w-screen p-10 flex space-x-5 sm:space-x-10 lg:flex-col lg:space-y-10 lg:p-8 lg:space-x-0">
+        <div className="w-screen p-5 flex space-x-5 sm:space-x-10 lg:flex-col lg:space-y-10 lg:p-8 lg:space-x-0">
             <div className="space-y-3 flex flex-col items-center lg:items-baseline w-full">
                 <h2 className="font-semibold sm:text-2xl">Now Trending</h2>
                 <div className="space-y-3 flex flex-col items-center lg:flex-row lg:space-x-3 lg:space-y-0 w-full">

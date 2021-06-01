@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import Loading from './components/Loading';
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useLocation } from 'react-router-dom'
 import StarHalfIcon from '@material-ui/icons/StarHalf'
 import LanguageIcon from '@material-ui/icons/Language'
 import WatchLaterIcon from '@material-ui/icons/WatchLater'
@@ -15,6 +15,7 @@ import SimilarMovies from './components/SimilarMovies';
 
 function MovieDetails() {
     const { id } = useParams()
+    const { path } = useLocation();
     const BASE_URL = "https://image.tmdb.org/t/p/original/"
     const API_KEY = "3f3460fb8427b4da507a64e4c80f3a16"
     const [movie, setMovie] = useState([])
@@ -52,21 +53,30 @@ function MovieDetails() {
         setProviders(companies.data.results.US)
         setSimilar(similars.data.results)
         setLoading(false)
+        window.scrollTo(0, 0);
         return details;
       }
       fetchData();
-    }, [urlMovieDetails, urlKeywords, urlSocialMedia, urlCredits, urlMoviesVideos, urlProviders, urlSimilarMovies])
+    }, [path, urlMovieDetails, urlKeywords, urlSocialMedia, urlCredits, urlMoviesVideos, urlProviders, urlSimilarMovies])
 
     return (
         <div className="h-auto bg-bg-main">
             {loading ? <Loading/> :
             <div className="bg-bg-main">
-                <div className="h-screen w-screen bg-bg-main">
-                    <div className="absolute top-0 right-0 min-w-full min-h-full object-cover bg-gradient-to-b bg-black-primary opacity-40 z-10 flex place-items-start justify-center">
+                <div className="sm:h-screen w-screen bg-bg-main border-b-2 sm:border-none">
+                    <div className="absolute top-0 right-0 min-w-full min-h-full object-cover bg-gradient-to-b bg-black-primary opacity-20 sm:opacity-40 z-10 flex place-items-start justify-center">
             
                     </div>
-                    <div className="absolute pb-3 top-0 right-0 min-w-full min-h-full space-y-4 object-cover bg-gradient-to-t from-bg-main z-10 flex flex-col justify-end md:pb-8 pl-5 pr-5 items-baseline lg:p-24 lg:pb-10">
-                        <h1 className="text-2xl font-bold sm:text-4xl overflow-hidden">{movie.title} ({movie.release_date.slice(0, 4)}.)</h1>
+                    <img
+                        src={
+                            `${BASE_URL}${movie.backdrop_path || movie.poster_path}` ||
+                            `${BASE_URL}${movie.poster_path}`
+                        }
+                        className="relative shadow-lg sm:shadow-none sm:absolute top-0 right-0 sm:min-h-full sm:max-h-full sm:min-w-full object-cover z-0"
+                        alt="poster"
+                    />
+                    <div className="relative sm:absolute sm:max-w-screen-sm pb-2 pt-4 top-0 right-0 min-w-full sm:min-h-full space-y-4 object-cover bg-gradient-to-t from-bg-main z-10 flex flex-col justify-end md:pb-8 pl-5 pr-5 items-baseline lg:p-24 lg:pb-10">
+                        <h1 className="text-2xl font-bold sm:text-4xl sm:h-14 overflow-hidden">{movie.title} ({movie.release_date.slice(0, 4)}.)</h1>
                         {movie.tagline ? 
                             <h2 className="text-xl font-normal sm:text-2xl overflow-hidden italic">{movie.tagline} </h2>
                         : 
@@ -77,7 +87,7 @@ function MovieDetails() {
                             </div>
                         }
                         <div className="flex flex-row space-x-3">
-                            {movie.genres.map(genre => (
+                            {movie.genres.slice(0, 4).map(genre => (
                                 <Link to={`/genre/${genre.id}/${genre.name}`}>
                                     <a 
                                         key={genre.id} 
@@ -102,7 +112,7 @@ function MovieDetails() {
                                 <p className="uppercase">{movie.original_language}</p>
                             </div>
                         </div>
-                        <p className="max-h-52 sm:max-h-full sm:w-96 md:w-1/2">{movie.overview}</p>
+                        <p className="sm:w-96 md:w-1/2">{movie.overview}</p>
                         <div className="space-x-4 flex">
                             <div className="bg-white-primary text-black-full overflow-hidden bg-opacity-50 font-semibold p-2 rounded-md hover:bg-opacity-70 sm:w-36 flex justify-center items-center h-10">
                                 <a href="/" className="text-base">Add to List</a>
@@ -115,8 +125,8 @@ function MovieDetails() {
                                 <div></div>
                             }
                         </div>
-                        <div className="w-full flex justify-between items-center">
-                            <div className="flex space-x-2 md:space-x-4">
+                        <div className="w-full flex justify-between items-center pb-5">
+                            <div className="flex items-center justify-center space-x-2 md:space-x-4">
                                 {social.facebook_id ? 
                                     <a target="_blank" rel="noreferrer" href={`https://www.facebook.com/${social.facebook_id}`}><FacebookIcon/></a>
                                 :
@@ -143,16 +153,8 @@ function MovieDetails() {
                             </div>
                         </div>
                     </div>
-                    <img
-                        src={
-                            `${BASE_URL}${movie.backdrop_path || movie.poster_path}` ||
-                            `${BASE_URL}${movie.poster_path}`
-                        }
-                        className="absolute top-0 right-0 min-h-full max-h-full min-w-full object-cover z-0"
-                        alt="poster"
-                    />
                 </div>
-                <div className="space-y-20">
+                <div className="space-y-20 pt-5">
                     <Cast credits={credits}/>
                     {videos.length > 3 ?
                         <MovieVideos videos={videos}/>
