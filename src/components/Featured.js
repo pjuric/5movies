@@ -14,7 +14,7 @@ function Featured({ movies, rated }) {
                     ))}
                     <div>
                         <Link to={`/trending`}>
-                            <div className="bg-black-primary bg-opacity-50 hover:bg-opacity-70 w-6 h-7 text-md font-semibold rounded-sm lg:w-20"><MoreHorizRoundedIcon/></div>
+                            <div className="bg-black-primary bg-opacity-50 hover:bg-opacity-70 w-16 h-7 text-md font-semibold rounded-sm lg:w-36 flex justify-center items-center"><MoreHorizRoundedIcon/></div>
                         </Link>
                     </div>
                 </div>
@@ -27,7 +27,7 @@ function Featured({ movies, rated }) {
                     ))}
                     <div>
                         <Link to={`/toprated`}>
-                            <div className="bg-black-primary bg-opacity-50 hover:bg-opacity-70 w-6 h-7 text-md font-semibold rounded-sm lg:w-20"><MoreHorizRoundedIcon/></div>
+                            <div className="bg-black-primary bg-opacity-50 hover:bg-opacity-70 w-16 h-7 text-md font-semibold rounded-sm lg:w-36 flex justify-center items-center"><MoreHorizRoundedIcon/></div>
                         </Link>
                     </div>
                 </div>

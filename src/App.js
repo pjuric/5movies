@@ -8,6 +8,7 @@ import Home from './Home'
 import Nav from './components/Nav'
 import TrendingMovies from './TrendingMovies'
 import CreditDetails from './components/CreditDetails'
+import Provider from './Provider'
 
 function App() {
 
@@ -15,21 +16,25 @@ function App() {
     const [movies, setMovies] = useState([])
     const [rated, setRated] = useState([])
     const [genres, setGenres] = useState([])
+    const [upcoming, setUpcoming] = useState([])
     const [loading, setLoading] = useState(true)
 
     const urlTrending = `https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&language=en-US`
     const urlTopRated = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`
     const urlGenres = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
-    
+    const urlUpcoming = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=2`
+
     useEffect(() => {
       const getTrending = () => axios.get(urlTrending)
       const getTopRated = () => axios.get(urlTopRated)
       const getGenres = () => axios.get(urlGenres)
+      const getUpcoming = () => axios.get(urlUpcoming)
       async function fetchData() {
-        const [request, top, allgenres] = await axios.all([getTrending(), getTopRated(), getGenres()]);
+        const [request, top, allgenres, following] = await axios.all([getTrending(), getTopRated(), getGenres(), getUpcoming()]);
         setMovies(request.data.results)
         setRated(top.data.results)
         setGenres(allgenres.data.genres)
+        setUpcoming(following.data.results)
         setLoading(false)
         return request;
       }
@@ -44,7 +49,7 @@ function App() {
               <Nav/>
               <Switch>
                 <Route exact path="/">
-                  <Home movies={movies} rated={rated} genres={genres}/>
+                  <Home movies={movies} rated={rated} genres={genres} upcoming={upcoming}/>
                 </Route>
                 <Route exact path="/movie/:id">
                   <MovieDetails/>
@@ -58,8 +63,14 @@ function App() {
                 <Route exact path="/toprated">
                   <TrendingMovies movies={rated} title="Top Rated"/>
                 </Route>
+                <Route exact path="/upcoming">
+                  <TrendingMovies movies={upcoming} title="Upcoming"/>
+                </Route>
                 <Route exact path="/credits/:id">
                   <CreditDetails/>
+                </Route>
+                <Route exact path="/provider/:name">
+                  <Provider/>
                 </Route>
               </Switch>
             </div>

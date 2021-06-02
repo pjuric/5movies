@@ -23,7 +23,7 @@ function Header ({ movies }) {
                         <p>{movies[0].vote_count}</p>
                     </div>
                 </div>
-                <p className="line-clamp-5 sm:line-clamp-none max-h-52 sm:max-h-full sm:w-96 md:w-1/2">{movies[0].overview}</p>
+                <p className="line-clamp-5 sm:line-clamp-none max-h-52 sm:max-h-full sm:w-96 md:w-1/2 pr-3">{movies[0].overview}</p>
                 <div className="space-x-4">
                         <Link to={`/movie/${id}`}>
                             <button className="bg-black-primary w-20 bg-opacity-50 font-semibold p-2 rounded-md hover:bg-opacity-70 sm:w-36">Details</button>

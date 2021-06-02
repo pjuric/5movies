@@ -88,9 +88,8 @@ function MovieDetails() {
                         }
                         <div className="flex flex-row space-x-3">
                             {movie.genres.slice(0, 4).map(genre => (
-                                <Link to={`/genre/${genre.id}/${genre.name}`}>
-                                    <a 
-                                        key={genre.id} 
+                                <Link key={genre.id} to={`/genre/${genre.id}/${genre.name}`}>
+                                    <a  
                                         href="/"
                                         className="hover:text-white-primary break-normal text-center"
                                     >{genre.name}</a>
@@ -125,7 +124,7 @@ function MovieDetails() {
                                 <div></div>
                             }
                         </div>
-                        <div className="w-full flex justify-between items-center pb-5">
+                        <div className="w-full flex justify-between items-start pb-5">
                             <div className="flex items-center justify-center space-x-2 md:space-x-4">
                                 {social.facebook_id ? 
                                     <a target="_blank" rel="noreferrer" href={`https://www.facebook.com/${social.facebook_id}`}><FacebookIcon/></a>
@@ -148,11 +147,13 @@ function MovieDetails() {
                                     <></>
                                 }
                             </div>
-                            {providers ?
-                                <div>
-                                    <a href="/"><img className="h-8 rounded-full opacity-50 hover:opacity-100" src={providers.flatrate ? `${BASE_URL}${providers.flatrate[0].logo_path}` : `${BASE_URL}${providers.rent[0].logo_path}` || `${BASE_URL}${providers.buy[0].logo_path}`} alt=""/></a>
+                            {providers &&
+                                <div className="flex flex-col items-center justify-center">
+                                    <Link to={`/provider/${providers.buy ? `${providers.buy[0].provider_name}` : (providers.rent ? `${providers.rent[0].provider_name}` : `${providers.flatrate[0].provider_name}`)}`}>
+                                        <a href="/"><img className="h-8 rounded-full opacity-50 hover:opacity-100" src={providers.buy ? `${BASE_URL}${providers.buy[0].logo_path}` : (providers.rent ? `${BASE_URL}${providers.rent[0].logo_path}` : `${BASE_URL}${providers.flatrate[0].logo_path}`)} alt=""/></a>
+                                    </Link>
+                                    <p className="text-xs">Data source: <i><b>JustWatch</b></i></p>
                                 </div>
-                            : <></>
                             } 
                         </div>
                     </div>
@@ -169,7 +170,6 @@ function MovieDetails() {
                         
                     : <></>
                     } 
-                    
                 </div>
             </div>
             }
