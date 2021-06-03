@@ -26,7 +26,7 @@ function GenreMovies() {
       }, [urlGenre])
 
     return (
-        <div className="bg-bg-main pt-14 md:pt-20 xl:pt-28">
+        <div className="bg-bg-main pt-14 md:pt-20 xl:pt-28 pb-10">
             {loading ? <Loading/> : 
             <div className="flex flex-col justify-center items-center">
                 <h1 className="overflow-hidden text-xl md:text-2xl xl:text-3xl xl:h-14 my-10">Trending <b>{name}</b> Movies</h1>

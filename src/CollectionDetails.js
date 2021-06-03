@@ -15,16 +15,6 @@ function CollectionDetails() {
     const [loading, setLoading] = useState(true)
 
     const urlCollection = `https://api.themoviedb.org/3/collection/${id}?api_key=${API_KEY}&language=en-US`
-    
-    useEffect(() => {
-        async function fetchData() {
-            const details = await axios.get(urlCollection)
-            setCollection(details.data)
-            setLoading(false)
-            return details;
-        }
-        fetchData();
-    }, [urlCollection])
 
     useEffect(() => {
         const getCollection = () => axios.get(urlCollection)
@@ -52,7 +42,7 @@ function CollectionDetails() {
                             className="shadow-lg w-full md:max-h-screen object-cover"
                         />
                         <div className="absolute px-5 top-0 w-full h-full bg-gradient-to-t text-center from-bg-main flex flex-col justify-end items-center pb-5 sm:pb-5">
-                            <h1 className="overflow-hidden text-center text-xl md:text-2xl xl:text-3xl xl:h-10 my-10 uppercase font-semibold shadow-lg">{collection.name}</h1>
+                            <h1 className="overflow-hidden text-center text-xl md:text-2xl xl:text-3xl xl:h-10 my-10 uppercase font-semibold">{collection.name}</h1>
                             <p className="hidden sm:block">{collection.overview}</p>
                         </div>
                         <div className="absolute top-0 w-full h-full bg-gradient-to-b from-black-primary opacity-25">

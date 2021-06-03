@@ -10,6 +10,7 @@ import TrendingMovies from './TrendingMovies'
 import CreditDetails from './components/CreditDetails'
 import Provider from './Provider'
 import CollectionDetails from './CollectionDetails'
+import Search from './Search'
 
 function App() {
 
@@ -75,6 +76,9 @@ function App() {
                 </Route>
                 <Route exact path="/collection/:id">
                   <CollectionDetails/>
+                </Route>
+                <Route exact path="/search">
+                  <Search/>
                 </Route>
               </Switch>
             </div>

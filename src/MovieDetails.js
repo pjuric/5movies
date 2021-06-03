@@ -77,7 +77,7 @@ function MovieDetails() {
                         alt="poster"
                     />
                     <div className="relative sm:absolute sm:max-w-screen-sm pb-2 pt-4 top-0 right-0 min-w-full sm:min-h-full space-y-4 object-cover bg-gradient-to-t from-bg-main z-10 flex flex-col justify-end md:pb-8 pl-5 pr-5 items-baseline lg:p-24 lg:pb-10">
-                        <h1 className="text-2xl font-bold sm:text-2xl lg:text-4xl sm:h-14 overflow-hidden">{movie.title} ({movie.release_date.slice(0, 4)}.)</h1>
+                        <h1 className="text-2xl font-bold sm:text-2xl lg:text-4xl sm:h-14 overflow-hidden">{movie.title} ({ movie.release_date.slice(0, 4)}.)</h1>
                         {movie.tagline ? 
                             <h2 className="text-xl font-normal sm:text-2xl overflow-hidden italic">{movie.tagline} </h2>
                         : 
