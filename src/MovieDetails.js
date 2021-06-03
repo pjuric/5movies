@@ -160,7 +160,9 @@ function MovieDetails() {
                     </div>
                 </div>
                 <div className="space-y-20 pt-5">
-                    <Cast credits={credits}/>
+                    {credits.length > 6 &&
+                        <Cast credits={credits}/>
+                    }
                     {videos.length >= 3 ?
                         <MovieVideos videos={videos}/>
                     :
