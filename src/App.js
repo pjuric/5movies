@@ -9,6 +9,7 @@ import Nav from './components/Nav'
 import TrendingMovies from './TrendingMovies'
 import CreditDetails from './components/CreditDetails'
 import Provider from './Provider'
+import CollectionDetails from './CollectionDetails'
 
 function App() {
 
@@ -39,7 +40,7 @@ function App() {
         return request;
       }
       fetchData();
-    }, [urlTrending, urlTopRated, urlGenres])
+    }, [urlTrending, urlTopRated, urlGenres, urlUpcoming])
 
   return (
     <div className="bg-bg-main w-screen">
@@ -71,6 +72,9 @@ function App() {
                 </Route>
                 <Route exact path="/provider/:name">
                   <Provider/>
+                </Route>
+                <Route exact path="/collection/:id">
+                  <CollectionDetails/>
                 </Route>
               </Switch>
             </div>

@@ -35,7 +35,6 @@ function CreditDetails() {
             {loading ? <Loading/> : 
                 <div className="p-5 h-full flex flex-col space-y-4">
                     <div className="flex justify-evenly space-x-3 md:space-x-0">
-            {console.log(social)}
                         <img className="w-48 lg:w-60" alt="" src={`${BASE_URL}${credit.profile_path}`}/>
                         <div className="text-sm flex flex-col justify-evenly">
                             <h1 className="text-base sm:text-lg lg:text-4xl lg:h-16"><b>{credit.name}</b></h1>

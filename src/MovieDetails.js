@@ -12,6 +12,7 @@ import MovieIcon from '@material-ui/icons/Movie'
 import MovieVideos from './components/MovieVideos';
 import Cast from './components/Cast';
 import SimilarMovies from './components/SimilarMovies';
+import Collection from './components/Collection';
 
 function MovieDetails() {
     const { id } = useParams()
@@ -82,19 +83,19 @@ function MovieDetails() {
                         : 
                             <div className="flex  space-x-2 w-screen">
                                 {keywords.slice(0, 4).map(keyword => (
-                                    <h2 className="text-xs font-normal sm:text-lg overflow-hidden italic">#{keyword.name} </h2>
+                                    <h2 key={keyword.id} className="text-xs font-normal sm:text-lg overflow-hidden italic">#{keyword.name} </h2>
                                 ))}
                             </div>
                         }
                         <div className="flex flex-row space-x-3">
                             {movie.genres.slice(0, 4).map(genre => (
-                                <Link key={genre.id} to={`/genre/${genre.id}/${genre.name}`}>
-                                    <a  
-                                        href="/"
-                                        className="hover:text-white-primary break-normal text-center"
-                                    >{genre.name}</a>
-                                </Link>
-                                
+                                <div key={genre.id}>
+                                    <Link to={`/genre/${genre.id}/${genre.name}`}>
+                                        <button  
+                                            className="hover:text-white-primary break-normal text-center"
+                                        >{genre.name}</button>
+                                    </Link>
+                                </div>  
                             ))}
                         </div>
                         <div className="flex space-x-10">
@@ -150,7 +151,7 @@ function MovieDetails() {
                             {providers &&
                                 <div className="flex flex-col items-center justify-center">
                                     <Link to={`/provider/${providers.buy ? `${providers.buy[0].provider_name}` : (providers.rent ? `${providers.rent[0].provider_name}` : `${providers.flatrate[0].provider_name}`)}`}>
-                                        <a href="/"><img className="h-8 rounded-full opacity-50 hover:opacity-100" src={providers.buy ? `${BASE_URL}${providers.buy[0].logo_path}` : (providers.rent ? `${BASE_URL}${providers.rent[0].logo_path}` : `${BASE_URL}${providers.flatrate[0].logo_path}`)} alt=""/></a>
+                                        <button><img className="h-8 rounded-full opacity-50 hover:opacity-100" src={providers.buy ? `${BASE_URL}${providers.buy[0].logo_path}` : (providers.rent ? `${BASE_URL}${providers.rent[0].logo_path}` : `${BASE_URL}${providers.flatrate[0].logo_path}`)} alt=""/></button>
                                     </Link>
                                     <p className="text-xs">Data source: <i><b>JustWatch</b></i></p>
                                 </div>
@@ -164,6 +165,9 @@ function MovieDetails() {
                         <MovieVideos videos={videos}/>
                     :
                         <></>
+                    }
+                    {movie.belongs_to_collection &&
+                        <Collection collection={movie.belongs_to_collection}/>
                     }
                     {similar.length > 0 ? 
                         <SimilarMovies similar={similar}/>

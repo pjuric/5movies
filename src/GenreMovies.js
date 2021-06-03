@@ -46,7 +46,7 @@ function GenreMovies() {
                                     <p className="overflow-hidden line-clamp-6 text-xs sm:text-sm self-center px-5 pt-3">{movie.overview}.</p>
                                 </Link>
                             </div>
-                            <h2 className="h-14 lg:h-16 xl:h-24 pt-5 overflow-hidden text-lg sm:text-base lg:text-xl">{movie.title} {movie.release_date ? <i className="text-white-primary text-base sm:text-sm lg:text-lg">({movie.release_date.slice(0, 4)}.)</i> : <></>}</h2>
+                            <h2 className="h-14 text-center lg:h-16 xl:h-24 pt-5 overflow-hidden text-lg sm:text-base lg:text-xl">{movie.title} {movie.release_date ? <i className="text-white-primary text-base sm:text-sm lg:text-lg">({movie.release_date.slice(0, 4)}.)</i> : <></>}</h2>
                         </div>
                         
                     ))}
