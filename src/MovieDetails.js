@@ -148,19 +148,19 @@ function MovieDetails() {
                                     <></>
                                 }
                             </div>
-                            {providers &&
+                            {/* {providers &&
                                 <div className="flex flex-col items-center justify-center">
                                     <Link to={`/provider/${providers.buy ? `${providers.buy[0].provider_name}` : (providers.rent ? `${providers.rent[0].provider_name}` : `${providers.flatrate[0].provider_name}`)}`}>
                                         <button><img className="h-8 rounded-full opacity-50 hover:opacity-100" src={providers.buy ? `${BASE_URL}${providers.buy[0].logo_path}` : (providers.rent ? `${BASE_URL}${providers.rent[0].logo_path}` : `${BASE_URL}${providers.flatrate[0].logo_path}`)} alt=""/></button>
                                     </Link>
                                     <p className="text-xs">Data source: <i><b>JustWatch</b></i></p>
                                 </div>
-                            } 
+                            }  */}
                         </div>
                     </div>
                 </div>
                 <div className="space-y-20 pt-5">
-                    {credits.length > 6 &&
+                    {credits.length > 5 &&
                         <Cast credits={credits}/>
                     }
                     {videos.length >= 3 ?
