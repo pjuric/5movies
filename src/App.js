@@ -11,6 +11,9 @@ import CreditDetails from './components/CreditDetails'
 import Provider from './Provider'
 import CollectionDetails from './CollectionDetails'
 import Search from './Search'
+import Login from './Login'
+import Auth from './Auth'
+import Welcome from './Welcome'
 
 function App() {
 
@@ -79,6 +82,12 @@ function App() {
                 </Route>
                 <Route exact path="/search">
                   <Search/>
+                </Route>
+                <Route exact path="/login">
+                  <Auth/>
+                </Route>
+                <Route exact path="/welcome">
+                  <Welcome/>
                 </Route>
               </Switch>
             </div>

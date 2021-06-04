@@ -28,7 +28,9 @@ function Header ({ movies }) {
                         <Link to={`/movie/${id}`}>
                             <button className="bg-black-primary w-20 bg-opacity-50 font-semibold p-2 rounded-md hover:bg-opacity-70 sm:w-36">Details</button>
                         </Link>
-                    <button className="bg-white-primary text-black-full bg-opacity-50 font-semibold p-2 rounded-md hover:bg-opacity-70 sm:w-36">Add to List</button>
+                        {/* <Link to={`/login`}> */}
+                            <button className="bg-white-primary text-black-full bg-opacity-50 font-semibold p-2 rounded-md hover:bg-opacity-70 sm:w-36">Add to List</button>
+                        {/* </Link> */}
                 </div>
             </div>
             <img
